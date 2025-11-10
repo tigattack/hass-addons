@@ -1,0 +1,47 @@
+#!/usr/bin/with-contenv bashio
+
+bashio::log.info "Starting smartctl_exporter..."
+
+# Declare variables
+declare smartctl_interval
+declare smartctl_rescan
+declare log_level
+declare device_exclude
+declare device_include
+declare -a flags
+
+# Get configuration values
+smartctl_interval=$(bashio::config 'smartctl_interval')
+smartctl_rescan=$(bashio::config 'smartctl_rescan')
+log_level=$(bashio::config 'log_level')
+
+# Build command flags
+flags+=(--smartctl.interval="${smartctl_interval}")
+flags+=(--smartctl.rescan="${smartctl_rescan}")
+flags+=(--log.level="${log_level}")
+flags+=(--web.listen-address=":9633")
+
+# Add device exclusion pattern if set
+if bashio::config.has_value 'smartctl_device_exclude'; then
+    device_exclude=$(bashio::config 'smartctl_device_exclude')
+    flags+=(--smartctl.device-exclude="${device_exclude}")
+fi
+
+# Add device inclusion pattern if set
+if bashio::config.has_value 'smartctl_device_include'; then
+    device_include=$(bashio::config 'smartctl_device_include')
+    flags+=(--smartctl.device-include="${device_include}")
+fi
+
+# Add specific devices if configured
+if bashio::config.has_value 'smartctl_devices'; then
+    for device in $(bashio::config 'smartctl_devices'); do
+        bashio::log.info "Adding device: ${device}"
+        flags+=(--smartctl.device="${device}")
+    done
+fi
+
+bashio::log.info "Starting smartctl_exporter with flags: ${flags[*]}"
+
+# Run smartctl_exporter
+exec /usr/local/bin/smartctl_exporter "${flags[@]}"

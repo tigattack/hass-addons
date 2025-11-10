@@ -1,0 +1,21 @@
+configuration:
+  smartctl_interval:
+    name: Smartctl Poll Interval
+    description: The interval between smartctl polls (e.g., "60s", "5m", "1h")
+  smartctl_rescan:
+    name: Device Rescan Interval
+    description: The interval between rescanning for new/disappeared devices (e.g., "10m", "1h"). Set to less than "1s" to disable rescanning.
+  log_level:
+    name: Log Level
+    description: Set the logging verbosity level
+  smartctl_devices:
+    name: Specific Devices
+    description: List of specific devices to monitor (e.g., ["/dev/sda", "/dev/nvme0"]). Leave empty for automatic discovery.
+  smartctl_device_exclude:
+    name: Device Exclude Pattern
+    description: Regular expression to exclude devices from automatic scanning (e.g., "^/dev/loop"). Mutually exclusive with Device Include Pattern.
+  smartctl_device_include:
+    name: Device Include Pattern
+    description: Regular expression to include only specific devices (e.g., "^/dev/sd"). Mutually exclusive with Device Exclude Pattern.
+network:
+  9633/tcp: Prometheus metrics endpoint

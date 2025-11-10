@@ -15,7 +15,7 @@ on:
 jobs:
   init:
     runs-on: ubuntu-latest
-    name: Initialize builds
+    name: Initialise builds
     outputs:
       changed_addons: ${{ steps.changed_addons.outputs.addons }}
       changed: ${{ steps.changed_addons.outputs.changed }}
@@ -56,6 +56,7 @@ jobs:
           else
             echo "No add-on had any monitored files changed (${{ env.MONITORED_FILES }})";
           fi
+
   build:
     needs: init
     runs-on: ubuntu-latest
