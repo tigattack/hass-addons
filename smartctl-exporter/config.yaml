@@ -1,6 +1,6 @@
 image: "ghcr.io/tigattack/hass-addon-smartctl-exporter-{arch}"
 name: smartctl exporter
-version: "0.2.0"
+version: "0.2.1"
 slug: smartctl_exporter
 description: Prometheus exporter for SMART disk metrics using smartctl
 url: "https://github.com/tigattack/hass-addons/tree/main/smartctl_exporter"

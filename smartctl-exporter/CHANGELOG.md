@@ -1,3 +1,9 @@
+## 0.2.1
+
+Changed:
+
+- Updated documentation
+
 ## 0.2.0
 
 Fixed:
