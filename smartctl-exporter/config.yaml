@@ -11,8 +11,6 @@ arch:
   - amd64
   - i386
 init: false
-startup: application
-boot: auto
 webui: http://[HOST]:[PORT:9633]
 # privileges source from
 # https://github.com/alexbelgium/hassio-addons/blob/master/scrutiny/config.yaml
