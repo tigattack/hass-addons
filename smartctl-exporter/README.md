@@ -28,7 +28,7 @@ Perfect for monitoring disk health in your home lab or server setup!
 
 ## Configuration
 
-The add-on works out of the box with automatic device discovery. See the [Documentation](DOCS.md) for advanced configuration options.
+The add-on works out of the box with automatic device discovery. See the [Documentation](./documentation/) for advanced configuration options.
 
 ## Metrics Access
 

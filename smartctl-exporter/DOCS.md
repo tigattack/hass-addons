@@ -103,6 +103,14 @@ If the add-on starts but reports no devices:
 
 ### Permission errors
 
-The add-on requires privileged access to read SMART data from devices. This is configured automatically with the `SYS_RAWIO` and `SYS_ADMIN` capabilities.
+If the logs look something look like the ones below, you may need to disable "Protection mode" on the add-on [Info](./info) page.
 
-If you see permission errors in the logs, please [report an issue on GitHub](https://github.com/tigattack/hass-addons).
+```
+time=2025-11-10T02:17:21.183Z level=ERROR source=readjson.go:146 msg="Device open failed, device did not return an IDENTIFY DEVICE structure, or device is in a low-power mode" device="/dev/nvme0;nvme (nvme0)"
+time=2025-11-10T02:17:21.183Z level=ERROR source=readjson.go:178 msg="Smartctl open device: /dev/nvme0 failed: Operation not permitted"
+time=2025-11-10T02:17:21.183Z level=WARN source=readjson.go:130 msg="device not found" device="/dev/nvme0;nvme (nvme0)"
+```
+
+While this add-on is configured with the `SYS_RAWIO`, `SYS_ADMIN`, and `DAC_READ_SEARCH` capabilities, this is often not enough for Home Assistant to provide the necessary permissions.
+
+If you see permission errors in the logs and enabling Protection Mode doesn't solve them, please [report an issue on GitHub](https://github.com/tigattack/hass-addons).
