@@ -13,9 +13,6 @@ RUN \
     case "${BUILD_ARCH}" in \
         aarch64) ARCH="arm64" ;; \
         amd64) ARCH="amd64" ;; \
-        armv7) ARCH="armv7" ;; \
-        armhf) ARCH="armv6" ;; \
-        i386) ARCH="386" ;; \
         *) echo "Unsupported architecture: ${BUILD_ARCH}" && exit 1 ;; \
     esac &&\
     curl -L -o /tmp/smartctl_exporter.tar.gz \

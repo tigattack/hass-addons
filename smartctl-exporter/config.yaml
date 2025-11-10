@@ -5,11 +5,8 @@ slug: smartctl_exporter
 description: Prometheus exporter for SMART disk metrics using smartctl
 url: "https://github.com/tigattack/hass-addons/tree/main/smartctl_exporter"
 arch:
-  - armhf
-  - armv7
   - aarch64
   - amd64
-  - i386
 init: false
 webui: http://[HOST]:[PORT:9633]
 # privileges source from
