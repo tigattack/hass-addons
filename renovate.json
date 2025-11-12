@@ -4,6 +4,16 @@
     "config:recommended",
     ":configMigration"
   ],
+  "packageRules": [
+    {
+      "description": "Group Home Assistant base image updates",
+      "matchPackageNames": [
+        "/ghcr\\.io\\/home-assistant\\/.+-base/",
+        "/ghcr\\.io\\/hassio-addons\\/base\\/.+/"
+      ],
+      "groupName": "Home Assistant base images"
+    }
+  ],
   "customManagers": [
     {
       "customType": "regex",
@@ -24,8 +34,7 @@
         "\"(?<packageName>ghcr\\.io/(?:home-assistant/[a-z0-9-]+-base|hassio-addons/base/[a-z0-9]+)):(?<currentValue>[0-9.]+)\""
       ],
       "datasourceTemplate": "docker",
-      "versioningTemplate": "loose",
-      "groupName": "Home Assistant base images"
+      "versioningTemplate": "loose"
     }
   ]
 }
