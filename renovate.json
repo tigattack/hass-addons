@@ -23,7 +23,8 @@
         "\"(?<packageName>ghcr\\.io/(?:home-assistant/[a-z0-9-]+-base|hassio-addons/base/[a-z0-9]+)):(?<currentValue>[0-9.]+)\""
       ],
       "datasourceTemplate": "docker",
-      "versioningTemplate": "loose"
+      "versioningTemplate": "loose",
+      "groupName": "Home Assistant base images"
     }
   ]
 }
