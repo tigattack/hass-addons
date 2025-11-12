@@ -1,6 +1,6 @@
 image: "ghcr.io/tigattack/hass-addon-smartctl-exporter-{arch}"
 name: smartctl exporter
-version: "0.2.1"
+version: "1.0.0"
 slug: smartctl_exporter
 description: Prometheus exporter for SMART disk metrics using smartctl
 url: "https://github.com/tigattack/hass-addons/tree/main/smartctl_exporter"
@@ -9,7 +9,7 @@ arch:
   - amd64
 init: false
 webui: http://[HOST]:[PORT:9633]
-# privileges source from
+# privileges sourced from
 # https://github.com/alexbelgium/hassio-addons/blob/master/scrutiny/config.yaml
 privileged:
   - SYS_ADMIN

@@ -1,3 +1,9 @@
+## 1.0.0
+
+Changed:
+
+- Add-on directory name in repository
+
 ## 0.2.1
 
 Changed:

@@ -6,7 +6,7 @@
 
 This repository contains the following add-ons
 
-### [smartctl-exporter](./smartctl-exporter)
+### [smartctl_exporter](./smartctl_exporter)
 
 ![Supports aarch64 Architecture][aarch64-shield]
 ![Supports amd64 Architecture][amd64-shield]
