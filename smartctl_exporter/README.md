@@ -3,7 +3,7 @@
 ![Supports aarch64 Architecture][aarch64-shield]
 ![Supports amd64 Architecture][amd64-shield]
 
-Prometheus exporter for SMART disk metrics using smartctl.
+Add-on for Prometheus smartctl_exporter - Exposes SMART disk info in Prometheus metrics format using smartctl.
 
 ## About
 
@@ -35,12 +35,6 @@ The add-on works out of the box with automatic device discovery. See the [Docume
 Metrics are available at: `http://homeassistant.local:9633/metrics`
 
 Click "OPEN WEB UI" in the add-on page to view the metrics directly.
-
-## Credits
-
-This add-on uses:
-- [smartctl_exporter](https://github.com/prometheus-community/smartctl_exporter) by the Prometheus Community
-- [smartmontools](https://www.smartmontools.org/) for SMART data collection
 
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
