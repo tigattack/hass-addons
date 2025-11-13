@@ -6,12 +6,19 @@
 
 This repository contains the following add-ons
 
+### [node_exporter](./node_exporter)
+
+![Supports aarch64 Architecture][aarch64-shield]
+![Supports amd64 Architecture][amd64-shield]
+
+_Prometheus node\_exporter for system metrics._
+
 ### [smartctl_exporter](./smartctl_exporter)
 
 ![Supports aarch64 Architecture][aarch64-shield]
 ![Supports amd64 Architecture][amd64-shield]
 
-_Prometheus exporter for SMART disk metrics using smartctl._
+_Prometheus smartctl\_exporter for SMART disk metrics._
 
 <!--
 

@@ -1,0 +1,178 @@
+configuration:
+  log_level:
+    name: Log Level
+    description: Set the logging level for the add-on
+  enable_basic_auth:
+    name: Enable HTTP Basic Authentication
+    description: Toggle on to enable HTTP basic authentication (i.e., password protection)
+  basic_auth_user:
+    name: Username
+    description: The basic auth username
+  basic_auth_pass:
+    name: Password
+    description: The basic auth password
+  enable_tls:
+    name: Enable TLS
+    description: Toggle on to enable TLS (you will need to provide a path to certificates)
+  cert_file:
+    name: Public Key
+    description: This is a /ssl/fullchain.pem
+  cert_key:
+    name: Private Key
+    description: This is a /ssl/privkey.pem
+  cmdline_extra_args:
+    name: Command line extra arguments
+    description: Extra arguments to pass to the "node_exporter" command at startup (see https://github.com/prometheus/node_exporter/#installation-and-usage for more information)
+  collectors:
+    name: Metrics Collectors
+    description: Enable/disable specific metrics collectors
+  arp:
+    name: ARP Statistics
+    description: Expose ARP statistics from /proc/net/arp
+  bcache:
+    name: Bcache Statistics
+    description: Expose bcache statistics from /sys/fs/bcache/
+  bonding:
+    name: Linux Bonding
+    description: Expose number of configured and active slaves of Linux bonding interfaces
+  btrfs:
+    name: Btrfs Statistics
+    description: Expose btrfs statistics
+  conntrack:
+    name: Conntrack Statistics
+    description: Show conntrack statistics
+  cpu:
+    name: CPU Statistics
+    description: Expose CPU statistics
+  cpufreq:
+    name: CPU Frequency
+    description: Expose CPU frequency statistics
+  diskstats:
+    name: Disk I/O Statistics
+    description: Expose disk I/O statistics
+  dmi:
+    name: DMI Information
+    description: Expose Desktop Management Interface (DMI) info from /sys/class/dmi/id/
+  edac:
+    name: EDAC Statistics
+    description: Expose error detection and correction statistics
+  entropy:
+    name: Available Entropy
+    description: Expose available entropy
+  fibrechannel:
+    name: Fibre Channel
+    description: Expose fibre channel information and statistics
+  filefd:
+    name: File Descriptor Statistics
+    description: Expose file descriptor statistics from /proc/sys/fs/file-nr
+  filesystem:
+    name: Filesystem Statistics
+    description: Expose filesystem statistics such as disk space used
+  hwmon:
+    name: Hardware Monitoring
+    description: Expose hardware monitoring and sensor data (temperature, fans, etc.)
+  infiniband:
+    name: InfiniBand Statistics
+    description: Expose network statistics specific to InfiniBand and Intel OmniPath
+  ipvs:
+    name: IPVS Statistics
+    description: Expose IPVS status and statistics
+  loadavg:
+    name: Load Average
+    description: Expose load average
+  mdadm:
+    name: MD/RAID Statistics
+    description: Expose statistics about devices in /proc/mdstat
+  meminfo:
+    name: Memory Statistics
+    description: Expose memory statistics
+  netclass:
+    name: Network Interface Info
+    description: Expose network interface info from /sys/class/net/
+  netdev:
+    name: Network Device Statistics
+    description: Expose network interface statistics such as bytes transferred
+  netstat:
+    name: Network Statistics
+    description: Expose network statistics from /proc/net/netstat
+  nfs:
+    name: NFS Client Statistics
+    description: Expose NFS client statistics
+  nfsd:
+    name: NFS Server Statistics
+    description: Expose NFS kernel server statistics
+  nvme:
+    name: NVMe Information
+    description: Expose NVMe info from /sys/class/nvme/
+  os:
+    name: OS Release Info
+    description: Expose OS release info
+  powersupplyclass:
+    name: Power Supply Statistics
+    description: Expose power supply statistics
+  pressure:
+    name: Pressure Stall Information
+    description: Expose pressure stall statistics (requires kernel 4.20+)
+  rapl:
+    name: RAPL Statistics
+    description: Expose RAPL (Running Average Power Limit) statistics
+  schedstat:
+    name: Scheduler Statistics
+    description: Expose task scheduler statistics
+  selinux:
+    name: SELinux Statistics
+    description: Expose SELinux statistics
+  sockstat:
+    name: Socket Statistics
+    description: Expose socket statistics from /proc/net/sockstat
+  softnet:
+    name: Softnet Statistics
+    description: Expose softnet statistics from /proc/net/softnet_stat
+  stat:
+    name: /proc/stat Statistics
+    description: Expose various statistics including boot time, forks and interrupts
+  tapestats:
+    name: Tape Statistics
+    description: Expose tape statistics from /sys/class/scsi_tape
+  textfile:
+    name: Textfile Collector
+    description: Expose statistics read from local disk (requires --collector.textfile.directory)
+  thermal_zone:
+    name: Thermal Zone Statistics
+    description: Expose thermal zone and cooling device statistics
+  time:
+    name: System Time
+    description: Expose the current system time
+  timex:
+    name: Timex Statistics
+    description: Expose selected adjtimex(2) system call statistics
+  udp_queues:
+    name: UDP Queue Statistics
+    description: Expose UDP total lengths of rx_queue and tx_queue
+  uname:
+    name: System Information
+    description: Expose system information as provided by the uname system call
+  vmstat:
+    name: Virtual Memory Statistics
+    description: Expose statistics from /proc/vmstat
+  watchdog:
+    name: Watchdog Statistics
+    description: Expose statistics from /sys/class/watchdog
+  xfs:
+    name: XFS Statistics
+    description: Expose XFS runtime statistics
+  zfs:
+    name: ZFS Statistics
+    description: Expose ZFS performance statistics
+  wifi:
+    name: WiFi Statistics
+    description: Expose WiFi device and station statistics
+  custom_collectors:
+    name: Custom Collectors
+    description: List of custom collectors to enable
+  ignore_mount_points:
+    name: Ignore Mount Points
+    description: List of mount points to ignore in filesystem metrics
+  ignore_network_devices:
+    name: Ignore Network Devices
+    description: List of network devices to ignore in network metrics

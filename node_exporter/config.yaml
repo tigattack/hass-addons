@@ -1,0 +1,150 @@
+# image: "ghcr.io/tigattack/hass-addon-node-exporter-{arch}"
+name: node exporter
+version: "0.1.0"
+slug: node_exporter
+description: Prometheus node_exporter - Exposes system statistics like CPU, memory, disk, and network usage in Prometheus metrics format
+url: https://github.com/tigattack/hass-addons/tree/main/node_exporter
+arch:
+  - amd64
+  - aarch64
+init: false
+webui: "[PROTO:enable_tls]://[HOST]:[PORT:9100]/metrics"
+watchdog: "tcp://[HOST]:[PORT:9100]"
+startup: services
+boot: auto
+host_network: true
+host_pid: true
+full_access: true
+apparmor: false
+hassio_api: false
+homeassistant_api: false
+docker_api: false
+ports:
+  9100/tcp: 9100
+ports_description:
+  9100/tcp: Prometheus metrics endpoint (requires authentication if enabled)
+map:
+  - "ssl:ro"
+options:
+  enable_basic_auth: false
+  basic_auth_user: ""
+  basic_auth_pass: ""
+  enable_tls: false
+  cert_file: ""
+  cert_key: ""
+  cmdline_extra_args: ""
+  log_level: "info"
+  collectors:
+    arp: true
+    bcache: false
+    bonding: false
+    btrfs: false
+    conntrack: true
+    cpu: true
+    cpufreq: true
+    diskstats: true
+    dmi: true
+    edac: true
+    entropy: true
+    fibrechannel: false
+    filefd: true
+    filesystem: true
+    hwmon: true
+    infiniband: false
+    ipvs: false
+    loadavg: true
+    mdadm: false
+    meminfo: true
+    netclass: true
+    netdev: true
+    netstat: true
+    nfs: false
+    nfsd: false
+    nvme: true
+    os: true
+    powersupplyclass: true
+    pressure: true
+    rapl: true
+    schedstat: true
+    selinux: false
+    sockstat: true
+    softnet: true
+    stat: true
+    tapestats: false
+    textfile: false
+    thermal_zone: true
+    time: true
+    timex: true
+    udp_queues: true
+    uname: true
+    vmstat: true
+    watchdog: true
+    xfs: false
+    zfs: false
+    wifi: false
+  custom_collectors: []
+  ignore_mount_points: []
+  ignore_network_devices: []
+schema:
+  enable_basic_auth: bool
+  basic_auth_user: str?
+  basic_auth_pass: password?
+  enable_tls: bool
+  cert_file: str?
+  cert_key: str?
+  cmdline_extra_args: str?
+  log_level: list(trace|debug|info|warn|error)?
+  collectors:
+    arp: bool
+    bcache: bool
+    bonding: bool
+    btrfs: bool
+    conntrack: bool
+    cpu: bool
+    cpufreq: bool
+    diskstats: bool
+    dmi: bool
+    edac: bool
+    entropy: bool
+    fibrechannel: bool
+    filefd: bool
+    filesystem: bool
+    hwmon: bool
+    infiniband: bool
+    ipvs: bool
+    loadavg: bool
+    mdadm: bool
+    meminfo: bool
+    netclass: bool
+    netdev: bool
+    netstat: bool
+    nfs: bool
+    nfsd: bool
+    nvme: bool
+    os: bool
+    powersupplyclass: bool
+    pressure: bool
+    rapl: bool
+    schedstat: bool
+    selinux: bool
+    sockstat: bool
+    softnet: bool
+    stat: bool
+    tapestats: bool
+    textfile: bool
+    thermal_zone: bool
+    time: bool
+    timex: bool
+    udp_queues: bool
+    uname: bool
+    vmstat: bool
+    watchdog: bool
+    xfs: bool
+    zfs: bool
+    wifi: bool
+  custom_collectors:
+    - str?
+  ignore_mount_points:
+    - str?
+  ignore_network_devices:
+    - str?
