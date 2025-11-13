@@ -168,11 +168,11 @@ configuration:
     name: WiFi Statistics
     description: Expose WiFi device and station statistics
   custom_collectors:
-    name: Custom Collectors
-    description: List of custom collectors to enable
+    name: Custom Collector Arguments
+    description: List of additional collector arguments to pass to node_exporter (e.g., "--collector.textfile.directory=/data/textfiles")
   ignore_mount_points:
-    name: Ignore Mount Points
-    description: List of mount points to ignore in filesystem metrics
+    name: Ignore Mount Point Patterns
+    description: List of regex patterns to exclude mount points from filesystem metrics (e.g., "^/(dev|proc|sys)($|/)")
   ignore_network_devices:
-    name: Ignore Network Devices
-    description: List of network devices to ignore in network metrics
+    name: Ignore Network Device Patterns
+    description: List of regex patterns to exclude network devices from network metrics (e.g., "^veth.*$")

@@ -3,7 +3,64 @@
 # Home Assistant Community Add-on: Prometheus Node Exporter
 # Runs the Prometheus Node Exporter
 # ==============================================================================
+
 bashio::log.info "Starting Prometheus Node Exporter..."
 
-# Run Prometheus
-exec /usr/local/bin/node_exporter --web.config.file=/data/node_exporter_web.yml $(bashio::config 'cmdline_extra_args' '')
+# Build command flags array
+declare -a flags=(
+    --web.config.file=/data/node_exporter_web.yml
+)
+
+# Configure collectors - disable defaults and enable only selected ones
+flags+=(--collector.disable-defaults)
+
+# Iterate through all collector options and enable the ones set to true
+while IFS= read -r collector; do
+    if bashio::config.true "collectors.${collector}"; then
+        flags+=(--collector."${collector}")
+    fi
+done < <(bashio::config 'collectors | keys[]')
+
+# Add mount point exclusions
+if bashio::config.has_value 'ignore_mount_points'; then
+    while read -r pattern; do
+        if bashio::var.has_value "${pattern}"; then
+            bashio::log.info "Excluding mount point pattern: ${pattern}"
+            flags+=(--collector.filesystem.mount-points-exclude="${pattern}")
+        fi
+    done < <(bashio::config 'ignore_mount_points | .[]')
+fi
+
+# Add network device exclusions
+if bashio::config.has_value 'ignore_network_devices'; then
+    while read -r pattern; do
+        if bashio::var.has_value "${pattern}"; then
+            bashio::log.info "Excluding network device pattern: ${pattern}"
+            flags+=(--collector.netdev.device-exclude="${pattern}")
+        fi
+    done < <(bashio::config 'ignore_network_devices | .[]')
+fi
+
+# Add custom collector arguments
+if bashio::config.has_value 'custom_collectors'; then
+    while read -r collector_arg; do
+        if bashio::var.has_value "${collector_arg}"; then
+            bashio::log.info "Adding custom collector argument: ${collector_arg}"
+            flags+=("${collector_arg}")
+        fi
+    done < <(bashio::config 'custom_collectors | .[]')
+fi
+
+# Add extra command line arguments
+if bashio::config.has_value 'cmdline_extra_args'; then
+    extra_args=$(bashio::config 'cmdline_extra_args')
+    if bashio::var.has_value "${extra_args}"; then
+        # shellcheck disable=SC2086
+        flags+=(${extra_args})
+    fi
+fi
+
+bashio::log.info "Starting node_exporter with flags: ${flags[*]}"
+
+# Run Node Exporter
+exec /usr/local/bin/node_exporter "${flags[@]}"
