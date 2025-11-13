@@ -10,14 +10,10 @@ arch:
 init: false
 webui: "[PROTO:enable_tls]://[HOST]:[PORT:9100]/metrics"
 startup: services
-boot: auto
 host_network: true
 host_pid: true
 full_access: true
 apparmor: false
-hassio_api: false
-homeassistant_api: false
-docker_api: false
 ports:
   9100/tcp: 9100
 ports_description:
