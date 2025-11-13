@@ -2,6 +2,13 @@
 
 <!-- https://keepachangelog.com -->
 
+## [1.1.0] - 2025-11-13
+
+Changed:
+
+- Set startup type to service (starts before HASS Core)
+- Refactor startup script to make better use of bashio
+
 ## [1.0.0] - 2025-11-12
 
 Changed:
