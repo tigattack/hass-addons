@@ -9,7 +9,6 @@ arch:
   - aarch64
 init: false
 webui: "[PROTO:enable_tls]://[HOST]:[PORT:9100]/metrics"
-watchdog: "tcp://[HOST]:[PORT:9100]"
 startup: services
 boot: auto
 host_network: true

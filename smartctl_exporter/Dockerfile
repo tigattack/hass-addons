@@ -21,3 +21,6 @@ RUN \
     rm -rf /tmp/smartctl_exporter* /tmp/LICENSE
 
 COPY rootfs /
+
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:9633/metrics || exit 1
