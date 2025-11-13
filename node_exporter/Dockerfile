@@ -4,7 +4,7 @@ FROM $BUILD_FROM
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # renovate: datasource=github-releases depName=node_exporter packageName=prometheus/node_exporter
-ARG NODE_EXPORTER_VERSION="1.8.2"
+ARG NODE_EXPORTER_VERSION="1.10.2"
 ARG BUILD_ARCH
 
 RUN \
