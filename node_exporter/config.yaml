@@ -1,4 +1,4 @@
-# image: "ghcr.io/tigattack/hass-addon-node-exporter-{arch}"
+image: "ghcr.io/tigattack/hass-addon-node-exporter-{arch}"
 name: node exporter
 version: "0.1.0"
 slug: node_exporter
