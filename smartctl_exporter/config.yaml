@@ -9,6 +9,7 @@ arch:
   - amd64
 init: false
 webui: http://[HOST]:[PORT:9633]
+startup: services
 # privileges sourced from
 # https://github.com/alexbelgium/hassio-addons/blob/master/scrutiny/config.yaml
 privileged:
