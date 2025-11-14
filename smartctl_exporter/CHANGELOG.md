@@ -2,6 +2,17 @@
 
 <!-- https://keepachangelog.com -->
 
+
+## [1.2.0] - 2025-11-14
+
+Fixed:
+
+- Correctly parse `smartctl_devices`
+
+Changed:
+
+- Update launch scripts
+
 ## [1.1.0] - 2025-11-13
 
 Changed:

@@ -47,10 +47,13 @@ if bashio::config.has_value 'smartctl_devices'; then
     device_count=0
     while read -r device; do
         if bashio::var.has_value "${device}"; then
-            bashio::log.info "Adding device: ${device}"
+            bashio::log.debug "Adding device: ${device}"
             flags+=(--smartctl.device="${device}")
+            device_count=$((device_count + 1))
         fi
-    done < <(bashio::config 'smartctl_devices | .[]')
+    done <<< "${devices_list}"
+else
+    bashio::log.debug "No specific devices configured"
 fi
 
 bashio::log.info "Starting smartctl_exporter with flags: ${flags[*]}"
