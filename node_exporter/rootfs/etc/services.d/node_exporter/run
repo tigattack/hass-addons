@@ -4,6 +4,10 @@
 # Runs the Prometheus Node Exporter
 # ==============================================================================
 
+# Set bashio log level from add-on configuration
+bashio::log.level "$(bashio::config 'log_level')"
+
+
 bashio::log.info "Starting Prometheus Node Exporter..."
 
 # Build command flags array
@@ -15,49 +19,63 @@ declare -a flags=(
 flags+=(--collector.disable-defaults)
 
 # Iterate through all collector options and enable the ones set to true
+collectors_json=$(bashio::config 'collectors')
 while IFS= read -r collector; do
-    if bashio::config.true "collectors.${collector}"; then
+    enabled=$(bashio::jq "${collectors_json}" ".${collector}")
+    if [[ "${enabled}" == "true" ]]; then
+        bashio::log.debug "Enabling collector: ${collector}"
         flags+=(--collector."${collector}")
     fi
-done < <(bashio::config 'collectors | keys[]')
+done < <(bashio::jq "${collectors_json}" 'keys[]')
 
 # Add mount point exclusions
 if bashio::config.has_value 'ignore_mount_points'; then
+    bashio::log.debug "Processing ignore_mount_points configuration"
     while read -r pattern; do
         if bashio::var.has_value "${pattern}"; then
-            bashio::log.info "Excluding mount point pattern: ${pattern}"
+            bashio::log.debug "Excluding mount point pattern: ${pattern}"
             flags+=(--collector.filesystem.mount-points-exclude="${pattern}")
         fi
     done < <(bashio::config 'ignore_mount_points | .[]')
+else
+    bashio::log.debug "No ignore_mount_points configured"
 fi
 
 # Add network device exclusions
 if bashio::config.has_value 'ignore_network_devices'; then
+    bashio::log.debug "Processing ignore_network_devices configuration"
     while read -r pattern; do
         if bashio::var.has_value "${pattern}"; then
-            bashio::log.info "Excluding network device pattern: ${pattern}"
+            bashio::log.debug "Excluding network device pattern: ${pattern}"
             flags+=(--collector.netdev.device-exclude="${pattern}")
         fi
     done < <(bashio::config 'ignore_network_devices | .[]')
+else
+    bashio::log.debug "No ignore_network_devices configured"
 fi
 
 # Add custom collector arguments
 if bashio::config.has_value 'custom_collectors'; then
+    bashio::log.debug "Processing custom_collectors configuration"
     while read -r collector_arg; do
         if bashio::var.has_value "${collector_arg}"; then
-            bashio::log.info "Adding custom collector argument: ${collector_arg}"
+            bashio::log.debug "Adding custom collector argument: ${collector_arg}"
             flags+=("${collector_arg}")
         fi
     done < <(bashio::config 'custom_collectors | .[]')
+else
+    bashio::log.debug "No custom_collectors configured"
 fi
 
 # Add extra command line arguments
 if bashio::config.has_value 'cmdline_extra_args'; then
     extra_args=$(bashio::config 'cmdline_extra_args')
     if bashio::var.has_value "${extra_args}"; then
-        # shellcheck disable=SC2086
+        bashio::log.debug "Adding extra command line arguments: ${extra_args}"
         flags+=(${extra_args})
     fi
+else
+    bashio::log.debug "No cmdline_extra_args configured"
 fi
 
 bashio::log.info "Starting node_exporter with flags: ${flags[*]}"

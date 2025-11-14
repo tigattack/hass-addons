@@ -5,6 +5,10 @@
 # ==============================================================================
 bashio::require.unprotected
 
+# Set bashio log level from add-on configuration
+bashio::log.level "$(bashio::config 'log_level')"
+
+
 web_config_file=/data/node_exporter_web.yml
 : > "$web_config_file"
 

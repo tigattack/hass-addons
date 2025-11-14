@@ -23,8 +23,7 @@ COPY rootfs /
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
     CMD curl -f http://localhost:9100/metrics || exit 1
 
-# This add-on runs on the host pid namespace, making it impossible to use S6-Overlay.
-# Therefore we must reset the entrypoint so it doesn't run.
+# This add-on doesn't use S6-Overlay. Reset the entrypoint so it doesn't run:
 ENTRYPOINT []
 
 CMD ["/run.sh"]
