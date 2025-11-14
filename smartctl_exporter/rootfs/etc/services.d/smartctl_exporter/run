@@ -1,8 +1,11 @@
-#!/usr/bin/with-contenv bashio
+#!/usr/bin/env bashio
 # ==============================================================================
 # Home Assistant Community Add-on: smartctl_exporter
 # Runs smartctl_exporter
 # ==============================================================================
+
+# Set bashio log level from add-on configuration
+bashio::log.level "$(bashio::config 'log_level')"
 
 bashio::log.info "Starting smartctl_exporter..."
 
@@ -14,18 +17,34 @@ declare -a flags=(
     --web.listen-address=":9633"
 )
 
+bashio::log.debug "Configured interval: $(bashio::config 'smartctl_interval')"
+bashio::log.debug "Configured rescan: $(bashio::config 'smartctl_rescan')"
+bashio::log.debug "Configured log level: $(bashio::config 'log_level')"
+
 # Add device exclusion pattern if configured
 if bashio::config.has_value 'smartctl_device_exclude'; then
-    flags+=(--smartctl.device-exclude="$(bashio::config 'smartctl_device_exclude')")
+    device_exclude=$(bashio::config 'smartctl_device_exclude')
+    bashio::log.debug "Excluding devices matching pattern: ${device_exclude}"
+    flags+=(--smartctl.device-exclude="${device_exclude}")
+else
+    bashio::log.debug "No device exclusion pattern configured"
 fi
 
 # Add device inclusion pattern if configured
 if bashio::config.has_value 'smartctl_device_include'; then
-    flags+=(--smartctl.device-include="$(bashio::config 'smartctl_device_include')")
+    device_include=$(bashio::config 'smartctl_device_include')
+    bashio::log.debug "Including only devices matching pattern: ${device_include}"
+    flags+=(--smartctl.device-include="${device_include}")
+else
+    bashio::log.debug "No device inclusion pattern configured"
 fi
 
 # Add specific devices if configured
 if bashio::config.has_value 'smartctl_devices'; then
+    bashio::log.debug "Processing smartctl_devices configuration"
+    devices_list=$(bashio::config 'smartctl_devices')
+    bashio::log.debug "Devices list:\n${devices_list}"
+    device_count=0
     while read -r device; do
         if bashio::var.has_value "${device}"; then
             bashio::log.info "Adding device: ${device}"
