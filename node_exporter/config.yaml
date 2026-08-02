@@ -2,7 +2,6 @@ image: "ghcr.io/tigattack/app-node-exporter"
 name: node exporter
 version: "2.0.0"
 slug: node_exporter
-type: app
 description: Prometheus node_exporter - Exposes system statistics like CPU, memory, disk, and network usage in Prometheus metrics format
 url: "https://github.com/tigattack/hass-addons/tree/main/node_exporter"
 arch:
