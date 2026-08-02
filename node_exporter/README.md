@@ -1,9 +1,9 @@
-# Home Assistant Add-on: node exporter
+# Home Assistant App: node exporter
 
 ![Supports aarch64 Architecture][aarch64-shield]
 ![Supports amd64 Architecture][amd64-shield]
 
-Add-on for Prometheus node_exporter - Exposes system statistics like CPU, memory, disk, and network usage in Prometheus metrics format
+App for Prometheus node_exporter - Exposes system statistics like CPU, memory, disk, and network usage in Prometheus metrics format
 
 ## Quick Start
 
@@ -30,7 +30,7 @@ enable_tls: false
 
 ## Access Metrics
 
-Once running, the add-on exposes metrics at:
+Once running, the app exposes metrics at:
 
 - **HTTP**: `http://your-home-assistant:9100/metrics` (e.g. <http://homeassistant:9100/metrics>)
 - **HTTPS** (if TLS enabled): `https://your-home-assistant:9100/metrics`

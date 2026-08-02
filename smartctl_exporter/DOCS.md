@@ -1,4 +1,4 @@
-# Home Assistant Add-on: smartctl exporter
+# Home Assistant App: smartctl exporter
 
 ## Configuration
 
@@ -10,7 +10,7 @@
 
 - **log_level** (string, default: `"info"`): Set the logging verbosity. Options are: `debug`, `info`, `warn`, `error`.
 
-- **smartctl_devices** (list, optional): List of specific devices to monitor. If not specified, the add-on will automatically scan and monitor all available devices. Example: `["/dev/sda", "/dev/nvme0"]`
+- **smartctl_devices** (list, optional): List of specific devices to monitor. If not specified, the app will automatically scan and monitor all available devices. Example: `["/dev/sda", "/dev/nvme0"]`
 
 - **smartctl_device_exclude** (string, optional): Regular expression pattern to exclude devices from automatic scanning. Mutually exclusive with `smartctl_device_include`. Example: `"^/dev/loop"` to exclude loop devices.
 
@@ -56,7 +56,7 @@ smartctl_devices: []
 
 ## Usage
 
-Once the add-on is running, it exposes Prometheus metrics on port 9633 at the `/metrics` endpoint.
+Once the app is running, it exposes Prometheus metrics on port 9633 at the `/metrics` endpoint.
 
 You can access the metrics at: `http://homeassistant.local:9633/metrics` (or use your Home Assistant's IP address).
 
@@ -73,7 +73,7 @@ scrape_configs:
 
 ### Viewing Metrics
 
-You can view the raw metrics by navigating to the WebUI link in the add-on page, or by visiting `http://homeassistant.local:9633/metrics` in your browser.
+You can view the raw metrics by navigating to the WebUI link in the app page, or by visiting `http://homeassistant.local:9633/metrics` in your browser.
 
 ## Metrics Exported
 
@@ -83,7 +83,7 @@ The exporter provides various SMART metrics including:
 - Temperature readings
 - Power-on hours
 - Power cycle count
-- SMART attributes (raw values and normalized values)
+- SMART attributes (raw values and normalised values)
 - Error counts
 - Self-test results
 - And many more...
@@ -94,16 +94,16 @@ For a complete list of metrics, visit the `/metrics` endpoint.
 
 ### No devices found
 
-If the add-on starts but reports no devices:
+If the app starts but reports no devices:
 
-1. Check the add-on logs for any errors
+1. Check the app logs for any errors
 2. Verify that your devices are accessible with the command: `smartctl --scan`
 3. Try specifying devices manually using the `smartctl_devices` configuration option
-4. Ensure the add-on has the necessary privileges (it should have by default)
+4. Ensure the app has the necessary privileges (it should have by default)
 
 ### Permission errors
 
-If the logs look something look like the ones below, you may need to disable "Protection mode" on the add-on [Info](./info) page.
+If the logs look something look like the ones below, you may need to disable "Protection mode" on the app [Info](./info) page.
 
 ```
 time=2025-11-10T02:17:21.183Z level=ERROR source=readjson.go:146 msg="Device open failed, device did not return an IDENTIFY DEVICE structure, or device is in a low-power mode" device="/dev/nvme0;nvme (nvme0)"
@@ -111,6 +111,6 @@ time=2025-11-10T02:17:21.183Z level=ERROR source=readjson.go:178 msg="Smartctl o
 time=2025-11-10T02:17:21.183Z level=WARN source=readjson.go:130 msg="device not found" device="/dev/nvme0;nvme (nvme0)"
 ```
 
-While this add-on is configured with the `SYS_RAWIO`, `SYS_ADMIN`, and `DAC_READ_SEARCH` capabilities, this is often not enough for Home Assistant to provide the necessary permissions.
+While this app is configured with the `SYS_RAWIO`, `SYS_ADMIN`, and `DAC_READ_SEARCH` capabilities, this is often not enough for Home Assistant to provide the necessary permissions.
 
 If you see permission errors in the logs and enabling Protection Mode doesn't solve them, please [report an issue on GitHub](https://github.com/tigattack/hass-addons).

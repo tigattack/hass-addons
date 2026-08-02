@@ -1,7 +1,7 @@
 configuration:
   log_level:
     name: Log Level
-    description: Set the logging level for the add-on
+    description: Set the logging level for the app
   enable_basic_auth:
     name: Enable HTTP Basic Authentication
     description: Toggle on to enable HTTP basic authentication (i.e., password protection)

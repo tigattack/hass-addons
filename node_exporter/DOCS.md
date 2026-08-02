@@ -1,4 +1,4 @@
-# Home Assistant Add-on: node exporter
+# Home Assistant App: node exporter
 
 ## Configuration
 
@@ -16,7 +16,7 @@ enable_tls: false
 ```yaml
 # Enable/disable specific collectors
 collectors:
-  cpu: true          # CPU usage and utilization
+  cpu: true          # CPU usage and utilisation
   meminfo: true      # Memory statistics
   diskstats: true    # Disk I/O statistics
   netdev: true       # Network interface stats
@@ -56,7 +56,7 @@ cert_key: "/ssl/privkey.pem"
 
 ## Metrics Endpoint
 
-Once running, the add-on exposes metrics at:
+Once running, the app exposes metrics at:
 
 - **HTTP**: `http://your-home-assistant:9100/metrics` (e.g. <http://homeassistant:9100/metrics>)
 - **HTTPS** (if TLS enabled): `https://your-home-assistant:9100/metrics`
