@@ -1,11 +1,11 @@
 #!/usr/bin/env bashio
 # ==============================================================================
-# Home Assistant Community Add-on: Prometheus Node Exporter
+# Home Assistant Community App: Prometheus Node Exporter
 # Configures node_exporter
 # ==============================================================================
 bashio::require.unprotected
 
-# Set bashio log level from add-on configuration
+# Set bashio log level from app configuration
 bashio::log.level "$(bashio::config 'log_level')"
 
 
