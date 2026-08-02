@@ -1,6 +1,6 @@
 #!/usr/bin/env bashio
 # ==============================================================================
-# Home Assistant Community Add-on: smartctl exporter
+# Home Assistant Community App: smartctl exporter
 # Runs smartctl_exporter
 # ==============================================================================
 

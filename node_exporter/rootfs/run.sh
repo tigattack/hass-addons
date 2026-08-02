@@ -1,10 +1,10 @@
 #!/usr/bin/env bashio
 # ==============================================================================
-# Home Assistant Community Add-on: node exporter
+# Home Assistant Community App: node exporter
 # Runs node_exporter
 # ==============================================================================
 
-# Set bashio log level from add-on configuration
+# Set bashio log level from app configuration
 bashio::log.level "$(bashio::config 'log_level')"
 
 /etc/cont-init.d/node_exporter.sh

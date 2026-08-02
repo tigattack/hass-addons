@@ -1,18 +1,24 @@
-ARG BUILD_FROM
-FROM $BUILD_FROM
+ARG BUILD_FROM=ghcr.io/home-assistant/base:3.22
+FROM ${BUILD_FROM}
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # renovate: datasource=github-releases depName=smartctl_exporter packageName=prometheus-community/smartctl_exporter
 ARG SMARTCTL_EXPORTER_VERSION="0.14.0"
-ARG BUILD_ARCH
+ARG TARGETARCH
 
 RUN \
     apk add --no-cache \
         smartmontools \
         jq &&\
-    ARCH="${BUILD_ARCH}" &&\
-    if [ "${BUILD_ARCH}" = "aarch64" ]; then ARCH="arm64"; fi &&\
+    if [ -z "${TARGETARCH}" ]; then \
+        echo "TARGETARCH is not set, please use Docker BuildKit for the build." && exit 1; \
+    fi &&\
+    case "${TARGETARCH}" in \
+        amd64) ARCH="amd64" ;; \
+        arm64) ARCH="arm64" ;; \
+        *) echo "Unsupported TARGETARCH: ${TARGETARCH}" && exit 1 ;; \
+    esac &&\
     curl -L -o /tmp/smartctl_exporter.tar.gz \
         "https://github.com/prometheus-community/smartctl_exporter/releases/download/v${SMARTCTL_EXPORTER_VERSION}/smartctl_exporter-${SMARTCTL_EXPORTER_VERSION}.linux-${ARCH}.tar.gz" &&\
     tar -xzvf /tmp/smartctl_exporter.tar.gz -C /tmp &&\
@@ -25,7 +31,7 @@ COPY rootfs /
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
     CMD curl -f http://localhost:9633/metrics || exit 1
 
-# This add-on doesn't use S6-Overlay. Reset the entrypoint so it doesn't run:
+# This app does not use S6-Overlay. Reset the entrypoint so it does not run.
 ENTRYPOINT []
 
 CMD ["/run.sh"]
