@@ -4,7 +4,7 @@ FROM ${BUILD_FROM}
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # renovate: datasource=github-releases depName=smartctl_exporter packageName=prometheus-community/smartctl_exporter
-ARG SMARTCTL_EXPORTER_VERSION="0.14.0"
+ARG SMARTCTL_EXPORTER_VERSION="0.15.0"
 ARG TARGETARCH
 
 RUN \
